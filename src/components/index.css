@@ -1,0 +1,49 @@
+@tailwind base;
+
+body {
+  @apply font-serif;
+}
+
+p {
+  @apply text-lg;
+}
+
+h1 {
+  @apply text-2xl;
+}
+h2 {
+  @apply text-xl mb-4 my-8;
+}
+h3 {
+  @apply text-lg mb-4 my-8 font-bold;
+}
+
+a {
+  @apply text-red-700 underline;
+}
+
+/* Width limiter for copy */
+p,
+figcaption,
+li,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply mb-4 max-w-2xl;
+}
+
+/* Embeds  */
+wp-block-embed__wrapper {
+  @apply my-8 w-full;
+}
+
+.player {
+  @apply w-full;
+}
+
+@tailwind components;
+@tailwind utilities;
