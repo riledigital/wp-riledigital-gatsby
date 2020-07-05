@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 
 export const PageTemplate = ({ title, content }) => {
   return (
-    <section className="section section--gradient">
+    <section className="section">
       <div className="container">
         <div className="columns">
           <div className="column is-10 is-offset-1">

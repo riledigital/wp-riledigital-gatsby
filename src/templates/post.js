@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { graphql, Link } from "gatsby";
-import Layout from "../components/Layout";
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import { graphql, Link } from 'gatsby'
+import Layout from '../components/Layout'
 
 export const BlogPostTemplate = ({
   content,
@@ -11,7 +11,7 @@ export const BlogPostTemplate = ({
   title,
   excerpt,
   date,
-  author
+  author,
 }) => {
   return (
     <div className="grid lg:grid-cols-4 gap-4 p-8">
@@ -19,7 +19,15 @@ export const BlogPostTemplate = ({
         <h1 className="text-2xl">{title}</h1>
         {/* <div style={{ marginTop: `4rem` }}> */}
 
-        <p className="">{excerpt && excerpt ? <div>excerpt</div> : null}</p>
+        <p className="">
+          {excerpt && excerpt ? (
+            <p
+              dangerouslySetInnerHTML={{
+                __html: excerpt.replace(/<p class="link-more.*/, ''),
+              }}
+            />
+          ) : null}
+        </p>
         {categories && categories.length ? (
           <div>
             <h4>Categories</h4>
@@ -52,16 +60,16 @@ export const BlogPostTemplate = ({
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </section>
     </div>
-  );
-};
+  )
+}
 
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
-  title: PropTypes.string
-};
+  title: PropTypes.string,
+}
 
 const BlogPost = ({ data }) => {
-  const { wordpressPost: post } = data;
+  const { wordpressPost: post } = data
 
   return (
     <Layout>
@@ -76,16 +84,16 @@ const BlogPost = ({ data }) => {
         excerpt={post.excerpt}
       />
     </Layout>
-  );
-};
+  )
+}
 
 BlogPost.propTypes = {
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object
-  })
-};
+    markdownRemark: PropTypes.object,
+  }),
+}
 
-export default BlogPost;
+export default BlogPost
 
 export const pageQuery = graphql`
   fragment PostFields on wordpress__POST {
@@ -117,4 +125,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

@@ -1,17 +1,32 @@
-import React from "react";
-import { Link, StaticQuery, graphql } from "gatsby";
-import github from "../img/github-icon.svg";
-import logo from "../img/logo.svg";
+import React from 'react'
+import { Link, StaticQuery, graphql } from 'gatsby'
+import github from '../img/github-icon.svg'
+import logo from '../img/logo.svg'
+
+const styleNavItems = `hover:text-red-600 focus:text-red-600 active:text-red-600`
 
 const Navbar = () => (
   <StaticQuery
     query={graphql`
       query {
+        allWordpressCategory(filter: {}) {
+          edges {
+            node {
+              id
+              slug
+              path
+              name
+              link
+            }
+          }
+        }
+
         allWordpressPage(sort: { fields: wordpress_id }, limit: 5) {
           edges {
             node {
               title
               slug
+              path
             }
           }
         }
@@ -27,14 +42,24 @@ const Navbar = () => (
             Ri Le
           </Link>
         </div>
+
         <div className="navbar-start md:text-right space-x-4">
           {data.allWordpressPage.edges.map(edge => (
             <Link
-              className="navbar-item"
-              to={edge.node.slug}
+              className={styleNavItems}
+              to={edge.node.path}
               key={edge.node.slug}
             >
               {edge.node.title}
+            </Link>
+          ))}
+          {data.allWordpressCategory.edges.map(edge => (
+            <Link
+              className={styleNavItems}
+              to={edge.node.path}
+              key={edge.node.slug}
+            >
+              {edge.node.name}
             </Link>
           ))}
         </div>
@@ -53,6 +78,6 @@ const Navbar = () => (
       </nav>
     )}
   />
-);
+)
 
-export default Navbar;
+export default Navbar

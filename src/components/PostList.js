@@ -1,18 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link, graphql } from "gatsby";
-import FeatureCard from "./FeatureCard";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link, graphql } from 'gatsby'
+import FeatureCard from './FeatureCard'
 
 export default class IndexPage extends React.Component {
   render() {
-    const { posts, title } = this.props;
+    const { posts, title } = this.props
 
     return (
       <section id="indexGrid" className="section">
         <div className="m-4 md:m-8">
-          <header className="content h-32">
-            <h2 className="text-2xl">{title}</h2>
-          </header>
+          {title && title ? (
+            <header className="content h-32">
+              <h2 className="text-2xl">{title}</h2>
+            </header>
+          ) : null}
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {posts.map(({ node: post }) => (
@@ -21,14 +23,14 @@ export default class IndexPage extends React.Component {
           </div>
         </div>
       </section>
-    );
+    )
   }
 }
 
 IndexPage.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string
-};
+  title: PropTypes.string,
+}
 
 export const pageQuery = graphql`
   # wordpress__POST
@@ -56,4 +58,4 @@ export const pageQuery = graphql`
     date(formatString: "MMMM DD, YYYY")
     slug
   }
-`;
+`
